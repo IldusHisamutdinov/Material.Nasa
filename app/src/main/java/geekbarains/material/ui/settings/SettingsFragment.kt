@@ -1,70 +1,68 @@
 package geekbarains.material.ui.settings
 
-import android.content.SharedPreferences
+
+import android.content.Context
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.Button
+import android.widget.Switch
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
-import com.google.android.material.chip.Chip
 import geekbarains.material.R
-import kotlinx.android.synthetic.main.fragment_settings.*
+import geekbarains.material.ui.Constants
 
-val sharedPreferences: SharedPreferences = TODO()
-
-class SettingsFragment : Fragment() {
-
-
+class SettingsFragment : Fragment(), View.OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_settings, container, false)
+        val button1: Button = rootView.findViewById(R.id.button1)
+        val button2: Button = rootView.findViewById(R.id.button2)
+        val button3: Button = rootView.findViewById(R.id.button3)
+        val button4: Button = rootView.findViewById(R.id.button4)
+        val swich: Switch = rootView.findViewById(R.id.swich)
+
+        button1.setOnClickListener(this)
+        button2.setOnClickListener(this)
+        button3.setOnClickListener(this)
+        button4.setOnClickListener(this)
+        swich.setOnClickListener(this)
+        return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        chipGroup.setOnCheckedChangeListener { chipGroup, position ->
-            when(getIntPreference("theme")){
-            1 -> R.style.TestStyleOne
-            2 -> R.style.TestStyleTwo
-            3 -> R.style.TestStyleThree
-            else -> R.style.AppTheme
-        }
-        }
-        light_theme.setOnClickListener {
-            setIntPreference("theme",1)
-            activity?.recreate()
-        }
-        dark_theme.setOnClickListener {
-            setIntPreference("theme",2)
-            activity?.recreate()
-        }
-        blue_theme.setOnClickListener {
-            setIntPreference("theme",3)
-            activity?.recreate()
-        }
+    override fun onClick(v: View?) {
+        val buttonIndex = translateIdToIndex(v!!.id)
+        context?.getSharedPreferences(Constants.KEY_CUSTOM_THEME_CHECKED, Context.MODE_PRIVATE)!!
+            .edit {
+                buttonIndex.let {
+                    this.putInt(Constants.THEME, it)
+                }
+            }
+        activity?.recreate()
     }
 
-    fun setIntPreference(parameter: String, value: Int) {
-        sharedPreferences.edit().putInt(parameter, value).apply()
-    }
-    fun getIntPreference(parameter: String): Int {
-        return sharedPreferences.getInt(parameter, 0)
-    }
-
-
-    fun changeTheme() {
-//        switchMaterial.setOnCheckedChangeListener { buttonView, isChecked ->
-//            if (isChecked) {
-//                // The switch is enabled/checked
-//                activity?.recreate()
-//            }
-//
-//        }
-
-
-    }
 }
+
+private fun translateIdToIndex(id: Int): Int {
+    var index = -1
+    when (id) {
+        R.id.button1 -> index = 1
+        R.id.button2 -> index = 2
+        R.id.button3 -> index = 3
+        R.id.button4 -> index = 4
+        R.id.swich -> index = 5
+    }
+    return index
+}
+
+
+
+
+
+
+
+
+

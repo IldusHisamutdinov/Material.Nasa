@@ -17,36 +17,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Themes"
+            android:text="@string/themes"
+            android:layout_marginLeft="40dp"
             android:textSize="18sp" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
+        <Switch
+            android:id="@+id/swich"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:singleSelection="true">
+            android:text="@string/apptheme"
+            android:layout_marginLeft="20dp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/light_theme"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Light" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/robin_egg_blue" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/dark_theme"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dark" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/blue_theme"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Blue" />
-        </com.google.android.material.chip.ChipGroup>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/persian_blue" />
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/azalea" />
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/apptheme" />
 
 
     </LinearLayout>

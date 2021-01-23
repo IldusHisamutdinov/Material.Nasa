@@ -1,21 +1,27 @@
 package geekbarains.material.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import geekbarains.material.R
 import geekbarains.material.ui.picture.PictureOfTheDayFragment
-import geekbarains.material.ui.settings.sharedPreferences
+
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(when(getIntPreference("theme")){
-            1 -> R.style.TestStyleOne
-            2 -> R.style.TestStyleTwo
-            3 -> R.style.TestStyleThree
-            else -> R.style.AppTheme
-        })
+        setTheme(
+            when (loadSharedPrefs()) {
+                1 -> R.style.Robin_Egg_Blue
+                2 -> R.style.Persian_Blue
+                3 -> R.style.Azalea
+                4 -> R.style.AppTheme
+                5 -> R.style.AppTheme
+                else -> R.style.AppTheme
+            }
+        )
+
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -24,8 +30,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-    fun getIntPreference(parameter: String): Int {
-        return sharedPreferences.getInt(parameter, 0)
-    }
+    private fun loadSharedPrefs(): Int =
+        getSharedPreferences(Constants.KEY_CUSTOM_THEME_CHECKED, Context.MODE_PRIVATE)
+            .getInt(
+                Constants.THEME, R.style.AppTheme
+            )
 }
+
+
+
+
+

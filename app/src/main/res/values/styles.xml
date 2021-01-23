@@ -20,7 +20,7 @@
 <!--        <item name="materialCardViewStyle">@style/AppCard</item>-->
     </style>
 
-    <style name="TestStyleOne" parent="AppTheme">
+    <style name="Robin_Egg_Blue" parent="AppTheme">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#F44336</item>
         <item name="colorPrimaryDark">#E91E63</item>
@@ -29,7 +29,7 @@
         <item name="android:navigationBarColor">#F44336</item>
     </style>
 
-    <style name="TestStyleTwo" parent="AppTheme">
+    <style name="Persian_Blue" parent="AppTheme">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#E42618</item>
         <item name="colorPrimaryDark">#1E21E9</item>
@@ -38,12 +38,12 @@
         <item name="android:navigationBarColor">#F41707</item>
     </style>
 
-    <style name="TestStyleThree" parent="AppTheme">
+    <style name="Azalea" parent="AppTheme">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#C10E45EF</item>
-        <item name="colorPrimaryDark">#F60B5B</item>
+        <item name="colorPrimaryDark">#7C9C7F</item>
         <item name="android:textColorPrimary">#9AE194</item>
-        <item name="android:windowBackground">#F1094A</item>
+        <item name="android:windowBackground">#F6C1CC</item>
         <item name="android:navigationBarColor">#082CAF</item>
     </style>
 
