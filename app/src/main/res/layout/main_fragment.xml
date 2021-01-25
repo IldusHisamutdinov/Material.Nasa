@@ -43,16 +43,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="17.01.2021"
+                android:text="@string/_17_01_2021"
                 android:layout_marginLeft="16dp" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jets from Unusual Galaxy Centaurus A"
                 android:textSize="18sp"
-                android:layout_marginLeft="6dp"/>
+                android:text="@string/jets_from_unusual_galaxy_centaurus_a"
+                android:layout_marginLeft="16dp"               />
 
             <geekbarains.material.util.EquilateralImageView
                 android:id="@+id/image_view"
@@ -77,9 +77,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginStart="10dp"
-                android:text="TextView"
+                android:text="@string/explanation"
                 android:textSize="16sp" />
-
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
