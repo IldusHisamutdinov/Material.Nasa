@@ -1,19 +1,28 @@
 package geekbarains.material.ui.settings
 
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Switch
+import android.widget.Toast
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import geekbarains.material.R
 import geekbarains.material.ui.Constants
 
 class SettingsFragment : Fragment(), View.OnClickListener {
+    val PREF_SWITCH = "pref_switch"
+    val sharedPreferences = context?.getSharedPreferences(PREF_SWITCH, MODE_PRIVATE)
+    val editor = sharedPreferences?.edit()
+
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,7 +39,25 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         button3.setOnClickListener(this)
         button4.setOnClickListener(this)
         swich.setOnClickListener(this)
+// switch не запоминает
+        swich.isChecked = sharedPreferences?.getBoolean(PREF_SWITCH, true) == true
+        swich.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                editor?.putBoolean(PREF_SWITCH, swich.isChecked)
+
+                toast("Push Notification ON")
+
+            } else {
+
+                editor?.putBoolean(PREF_SWITCH, false)
+                toast("Push Notification Off")
+
+            }
+            editor?.commit()
+        }
+
         return rootView
+
     }
 
     override fun onClick(v: View?) {
@@ -42,9 +69,11 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                 }
             }
         activity?.recreate()
+        //       requireActivity() - тормозит
     }
 
 }
+
 
 private fun translateIdToIndex(id: Int): Int {
     var index = -1
@@ -58,6 +87,12 @@ private fun translateIdToIndex(id: Int): Int {
     return index
 }
 
+private fun Fragment.toast(string: String?) {
+    Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
+        setGravity(Gravity.BOTTOM, 0, 250)
+        show()
+    }
+}
 
 
 

@@ -14,37 +14,43 @@
         <item name="colorSurface">#FFFFFF</item>
         <item name="colorOnSurface">#212121</item>
         <item name="colorControlNormal">@android:color/black </item>
-
     </style>
 
     <style name="Robin_Egg_Blue" parent="AppTheme">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#00BCD4</item>
+        <item name="colorPrimary">@color/colorPersian_Blue</item>
         <item name="colorPrimaryDark">#E91E63</item>
         <item name="android:textColorPrimary">#FFEB3B</item>
         <item name="android:windowBackground">#00BCD4</item>
-        <item name="android:navigationBarColor">#00BCD4</item>
+        <item name="android:navigationBarColor">@color/colorPersian_Blue</item>
+        <item name="android:buttonStyleToggle">@android:color/holo_red_light</item>
     </style>
 
     <style name="Persian_Blue" parent="AppTheme">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#D00071D4</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#1E21E9</item>
         <item name="android:textColorPrimary">#3BFFFF</item>
         <item name="android:windowBackground">#D00071D4</item>
-        <item name="android:navigationBarColor">#D00071D4</item>
-        <item name ="android:textColor">@color/color_gray</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="Azalea" parent="AppTheme">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#F6C1CC</item>
+        <item name="colorPrimary">@android:color/holo_red_light</item>
         <item name="colorPrimaryDark">#7C9C7F</item>
         <item name="android:textColorPrimary">#9AE194</item>
         <item name="android:windowBackground">#F6C1CC</item>
         <item name="android:navigationBarColor">#F41707</item>
-        <item name ="android:textColor">@android:color/holo_red_light </item>
-        <item name ="colorControlActivated" >@android:color/holo_purple </item>
+        <item name ="android:textColor">@android:color/holo_red_light</item>
+        <item name ="colorControlActivated" >@android:color/holo_purple</item>
+    </style>
+
+    <style name="Night" parent="AppTheme">
+        <item name ="android:textColor">@color/colorWhite</item>
+        <item name="android:windowBackground">@color/colorSilver_Sand</item>
+
     </style>
 
 </resources>

@@ -1,5 +1,6 @@
 package geekbarains.material.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import geekbarains.material.R
@@ -12,6 +13,16 @@ class ApiBottomActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(
+            when (loadSharedPrefs()) {
+                1 -> R.style.Robin_Egg_Blue
+                2 -> R.style.Persian_Blue
+                3 -> R.style.Azalea
+                4 -> R.style.AppTheme
+                5 -> R.style.Night
+                else -> R.style.AppTheme
+            }
+        )
         setContentView(R.layout.activity_api_bottom)
         bottom_navigation_view.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -61,4 +72,10 @@ class ApiBottomActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun loadSharedPrefs(): Int =
+        getSharedPreferences(Constants.KEY_CUSTOM_THEME_CHECKED, Context.MODE_PRIVATE)
+            .getInt(
+                Constants.THEME, R.style.AppTheme
+            )
 }
