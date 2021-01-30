@@ -19,6 +19,11 @@ class PictureOfTheDayViewModel(
         return liveDataForViewToObserve
     }
 
+    fun getDataRequest(): LiveData<PictureOfTheDayData> {
+        sendServerRequestDate(this.toString())
+        return liveDataForViewToObserve
+    }
+
     private fun sendServerRequest() {
         liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
         val apiKey: String = BuildConfig.NASA_API_KEY
@@ -31,9 +36,45 @@ class PictureOfTheDayViewModel(
                     call: Call<PODServerResponseData>,
                     response: Response<PODServerResponseData>
                 ) {
-                    if (response.isSuccessful && response.body() != null) {
+                    if (response.isSuccessful) {
+                        response.body()?.run{
                         liveDataForViewToObserve.value =
-                            PictureOfTheDayData.Success(response.body()!!)
+                            PictureOfTheDayData.Success(this)}
+                    } else {
+                        val message = response.message()
+                        if (message.isNullOrEmpty()) {
+                            liveDataForViewToObserve.value =
+                                PictureOfTheDayData.Error(Throwable("Unidentified error"))
+                        } else {
+                            liveDataForViewToObserve.value =
+                                PictureOfTheDayData.Error(Throwable(message))
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<PODServerResponseData>, t: Throwable) {
+                    liveDataForViewToObserve.value = PictureOfTheDayData.Error(t)
+                }
+            })
+        }
+    }
+
+    fun sendServerRequestDate(date: String) {
+        liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
+        val apiKey: String = BuildConfig.NASA_API_KEY
+        if (apiKey.isBlank()) {
+            PictureOfTheDayData.Error(Throwable("You need API key"))
+        } else {
+            retrofitImpl.getRetrofitImpl().getPictureOfTheDays(date, apiKey).enqueue(object :
+                Callback<PODServerResponseData> {
+                override fun onResponse(
+                    call: Call<PODServerResponseData>,
+                    response: Response<PODServerResponseData>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.run{
+                            liveDataForViewToObserve.value =
+                                PictureOfTheDayData.Success(this)}
                     } else {
                         val message = response.message()
                         if (message.isNullOrEmpty()) {
