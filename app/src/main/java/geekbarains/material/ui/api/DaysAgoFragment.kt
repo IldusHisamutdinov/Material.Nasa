@@ -30,11 +30,15 @@ class DaysAgoFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_days_ago, container, false)
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.run { sendServerRequestDate(getDate(-3)) }
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.run { sendServerRequestDate(getDate(-3)) }
         viewModel.getDataRequest()
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> {
                 renderData(it) })

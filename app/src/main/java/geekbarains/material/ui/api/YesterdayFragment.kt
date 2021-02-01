@@ -31,12 +31,15 @@ class YesterdayFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_yesterday, container, false)
     }
-
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.run { sendServerRequestDate(getDate(-1)) }
+    }
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.run { sendServerRequestDate(getDate(-1)) }
-        viewModel.getDataRequest()
+       viewModel.getDataRequest()
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> {
                 renderData(it) })
     }

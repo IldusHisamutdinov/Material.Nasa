@@ -1,5 +1,7 @@
 package geekbarains.material.ui.picture
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,18 +15,18 @@ class PictureOfTheDayViewModel(
     private val retrofitImpl: PODRetrofitImpl = PODRetrofitImpl()
 ) :
     ViewModel() {
-
     fun getData(): LiveData<PictureOfTheDayData> {
         sendServerRequest()
         return liveDataForViewToObserve
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun getDataRequest(): LiveData<PictureOfTheDayData> {
-        sendServerRequestDate(this.toString())
+//        sendServerRequestDate(getDate())
         return liveDataForViewToObserve
     }
 
-    private fun sendServerRequest() {
+    fun sendServerRequest() {
         liveDataForViewToObserve.value = PictureOfTheDayData.Loading(null)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
