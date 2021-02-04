@@ -4,7 +4,7 @@
         <item
             android:id="@+id/navigation_one"
             android:icon="@drawable/ic_archive"
-            android:title="На экран 1" />
+            android:title="Блокнот" />
         <item
             android:id="@+id/navigation_two"
             android:icon="@drawable/ic_send"
