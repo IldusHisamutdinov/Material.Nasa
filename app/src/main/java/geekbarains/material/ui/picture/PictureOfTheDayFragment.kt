@@ -4,9 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.view.*
-import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +46,7 @@ class PictureOfTheDayFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        wiki_button.setOnClickListener(this)
+        wiki_button.setOnClickListener(this) // разворачивание окно поиска Википедии
         //  setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         input_layout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -68,6 +66,11 @@ class PictureOfTheDayFragment : Fragment(), View.OnClickListener {
             R.id.app_bar_fav -> activity?.let { startActivity(Intent(it, ApiBottomActivity::class.java)) }
             R.id.app_bar_settings -> activity?.supportFragmentManager?.beginTransaction()
                 ?.add(R.id.container, SettingsFragment())?.replace(R.id.container, SettingsFragment())?.addToBackStack(null)?.commit()
+            android.R.id.home -> {
+                activity?.let {
+                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -154,7 +157,7 @@ class PictureOfTheDayFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        main.transitionToEnd()
+        main.transitionToEnd()  //сворачивание окно поиска Википедии
     }
 
 }
