@@ -65,17 +65,19 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="96dp"
+                style="@style/TitleStyle"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="6dp"
                 android:text="@string/jets_from_unusual_galaxy_centaurus_a"
-                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/explanation"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/image_view" />
 
             <geekbarains.material.util.EquilateralImageView
                 android:id="@+id/image_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
                 android:layout_marginStart="6dp"
                 android:layout_marginEnd="6dp"
                 android:contentDescription="@string/photo_of_the_day_stub"
@@ -83,8 +85,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/title"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.229"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
 
             <WebView
@@ -99,11 +101,12 @@
                 android:id="@+id/explanation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/ExplanationStyle"
                 android:layout_marginStart="10dp"
-                android:text="@string/explanation"
-                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                android:text="@string/celestial_sights_of_the_southern_sky"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_view" />
+                app:layout_constraintTop_toBottomOf="@+id/title" />
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.core.widget.NestedScrollView>

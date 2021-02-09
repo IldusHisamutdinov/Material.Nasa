@@ -1,7 +1,12 @@
 package geekbarains.material.ui.api
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.text.style.UnderlineSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -18,22 +23,26 @@ import geekbarains.material.ui.picture.PictureOfTheDayData
 import geekbarains.material.ui.picture.PictureOfTheDayViewModel
 import geekbarains.material.util.getDate
 import kotlinx.android.synthetic.main.fragment_day_before_yesterday.*
+import kotlinx.android.synthetic.main.fragment_days_ago.*
+import kotlinx.android.synthetic.main.fragment_yesterday.*
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class DayBeforeYesterdayFragment : Fragment() {
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_day_before_yesterday, container, false)
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.run { sendServerRequestDate(getDate(-2)) }
+        viewModel.sendServerRequestDate(getDate(-2))
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -41,7 +50,8 @@ class DayBeforeYesterdayFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getDataRequest()
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> {
-                renderData(it) })
+                renderData(it)
+            })
     }
 
     private fun renderData(data: PictureOfTheDayData) {
@@ -51,15 +61,35 @@ class DayBeforeYesterdayFragment : Fragment() {
                 val url = serverResponseData.url
                 title_mars.text = serverResponseData.title
                 date_mars.text = serverResponseData.date
+                val spannable = SpannableStringBuilder(serverResponseData.title)
+                spannable.setSpan(
+                    UnderlineSpan(),0, spannable.length,
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.RED),
+                    0,1,
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                )
+                title_mars.text = spannable
                 if (url.isNullOrEmpty()) {
                     //showError("Сообщение, что ссылка пустая")
                     toast("Link is empty")
                 } else {
-                    //showSuccess()
-                    image_mars.load(url) {
-                        lifecycle(this@DayBeforeYesterdayFragment)
-                        error(R.drawable.ic_load_error_vector)
-                        placeholder(R.drawable.ic_no_photo_vector)
+                    if (serverResponseData.mediaType == "video") {
+                        webView2.visibility = View.VISIBLE
+                        image_mars.visibility = View.INVISIBLE
+                        webView2.clearCache(true);
+                        webView2.clearHistory();
+                        webView2.getSettings().setJavaScriptEnabled(true);
+                        webView2.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+                        webView2.loadUrl(url)
+                    } else {
+                        //showSuccess()
+                        image_mars.load(url) {
+                            lifecycle(this@DayBeforeYesterdayFragment)
+                            error(R.drawable.ic_load_error_vector)
+                            placeholder(R.drawable.ic_no_photo_vector)
+                        }
                     }
                 }
             }

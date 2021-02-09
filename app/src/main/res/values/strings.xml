@@ -17,4 +17,7 @@
     <string name="jets_from_unusual_galaxy_centaurus_a">Jets from Unusual Galaxy Centaurus A</string>
     <string name="_17_01_2021">17.01.2021</string>
     <string name="explanation">Explanation</string>
+    <string name="night">Night</string>
+    <string name="celestial_sights_of_the_southern_sky">Celestial sights of the southern sky</string>
+    <string name="southern_sky">Southern Sky</string>
 </resources>

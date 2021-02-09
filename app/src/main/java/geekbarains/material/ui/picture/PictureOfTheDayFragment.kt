@@ -1,9 +1,17 @@
 package geekbarains.material.ui.picture
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.BackgroundColorSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -83,6 +91,17 @@ class PictureOfTheDayFragment : Fragment(), View.OnClickListener {
                 val url = serverResponseData.url
                 title.text = serverResponseData.title
                 explanation.text = serverResponseData.explanation
+                val spannable = SpannableStringBuilder(serverResponseData.title)
+                spannable.setSpan(
+                    UnderlineSpan(),0, spannable.length,
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+                spannable.setSpan(
+                    ForegroundColorSpan(Color.RED),
+                    0, // start
+                    1, // end
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                )
+                title.text = spannable
                 date.text = serverResponseData.date
                 if (url.isNullOrEmpty()) {
                     //showError("Сообщение, что ссылка пустая")

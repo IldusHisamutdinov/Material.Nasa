@@ -29,15 +29,27 @@
         app:srcCompat="@drawable/bg_mars"
         tools:ignore="MissingConstraints" />
 
+    <WebView
+        android:id="@+id/webView2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/title_mars"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.229"
+        app:layout_constraintTop_toBottomOf="@+id/date_mars" />
+
     <TextView
         android:id="@+id/title_mars"
+        style="@style/TitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="76dp"
         android:text="@string/southern_sky"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_mars"
