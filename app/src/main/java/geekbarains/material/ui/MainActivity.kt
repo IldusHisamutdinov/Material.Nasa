@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import geekbarains.material.R
 import geekbarains.material.ui.picture.PictureOfTheDayFragment
 
-
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(
@@ -17,10 +15,14 @@ class MainActivity : AppCompatActivity() {
                 2 -> R.style.Persian_Blue
                 3 -> R.style.Azalea
                 4 -> R.style.AppTheme
-                5 -> R.style.AppTheme
-                else -> R.style.AppTheme
+                else -> {
+                    when(loadSharedPrefses()){
+                       false -> R.style.AppTheme
+                        else -> R.style.Night}
+                }
             }
         )
+
 
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
@@ -35,7 +37,13 @@ class MainActivity : AppCompatActivity() {
             .getInt(
                 Constants.THEME, R.style.AppTheme
             )
+    private fun loadSharedPrefses(): Boolean =
+        getSharedPreferences(Constants.SHARED_PREFS, Context.MODE_PRIVATE)
+            .getBoolean(
+                Constants.SWITCH, false
+            )
 }
+
 
 
 
