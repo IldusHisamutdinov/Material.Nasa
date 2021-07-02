@@ -31,16 +31,12 @@ class YesterdayFragmentTest {
     fun setup() {
         //Для начала сворачиваем все приложения, если у нас что-то запущено
         uiDevice.pressHome()
-
         //Запускаем наше приложение
         val intent = context.packageManager.getLaunchIntentForPackage(packageName)
-        //Мы уже проверяли Интент на null в предыдущем тесте, поэтому допускаем, что Интент у нас не null
-        intent!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)//Чистим бэкстек от запущенных ранее Активити
         context.startActivity(intent)
-
         //Ждем, когда приложение откроется на смартфоне чтобы начать тестировать его элементы
         uiDevice.wait(Until.hasObject(By.pkg(packageName).depth(0)), TIMEOUT)
-  //      scenario = launchFragmentInContainer()
+        scenario = launchFragmentInContainer()
     }
     @Test
     fun fragment_AssertNotNull() {
@@ -52,6 +48,17 @@ class YesterdayFragmentTest {
         Espresso.onView(withId(R.id.date_earth))
             .check(ViewAssertions.matches(ViewMatchers.isCompletelyDisplayed()))
     }
+    @Test
+    fun fragmentImageView_IsCompletelyDisplayed() {
+        Espresso.onView(withId(R.id.image_earth))
+            .check(ViewAssertions.matches(ViewMatchers.isCompletelyDisplayed()))
+    }
+    @Test
+    fun fragmentTextViewTitle_IsCompletelyDisplayed() {
+        Espresso.onView(withId(R.id.title_earth))
+            .check(ViewAssertions.matches(ViewMatchers.isCompletelyDisplayed()))
+    }
+
     //проверяем дату YesterdayFragment : проверяет TextView android:text="30.01.2021"
     @Test
     fun fragmentTextView_HasText() {
