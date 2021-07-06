@@ -9,4 +9,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="themes">Themes</string>
+    <string name="apptheme">AppTheme</string>
+    <string name="robin_egg_blue">Robin Egg Blue</string>
+    <string name="persian_blue">Persian Blue</string>
+    <string name="azalea">Azalea</string>
+    <string name="jets_from_unusual_galaxy_centaurus_a">Jets from Unusual Galaxy Centaurus A</string>
+    <string name="_17_01_2021">17.01.2021</string>
+    <string name="explanation">Explanation</string>
+    <string name="night">Night</string>
+    <string name="celestial_sights_of_the_southern_sky">Celestial sights of the southern sky</string>
+    <string name="southern_sky">Southern Sky</string>
 </resources>
